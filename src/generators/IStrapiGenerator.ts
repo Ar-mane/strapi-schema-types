@@ -3,4 +3,5 @@ export interface IStrapiGenerator {
   generateCollections(): void;
   generateComponents(): void;
   generateSingleTypes(): void;
+  generateRoutes(): void;
 }

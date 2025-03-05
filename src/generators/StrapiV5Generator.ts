@@ -1,7 +1,9 @@
 import { join, parse } from 'path';
+import { Config } from '../Config';
 import { readDirectory, readFile, writeFile } from '../utils/fs';
+import { interfaceName } from '../utils/naming';
+import { v5Api } from '../utils/paths';
 import { StrapiGenerator } from './StrapiGenerator';
-import { pascalCase } from 'change-case';
 
 export class StrapiV5Generator extends StrapiGenerator {
   constructor(private config: Config) {
@@ -25,13 +27,14 @@ export class StrapiV5Generator extends StrapiGenerator {
   generateCollections(): void {
     let apiFolders: string[] = [];
 
-    apiFolders = readDirectory('./src/api').filter(
+    apiFolders = readDirectory(v5Api).filter(
       (directory) => !directory.startsWith('.')
     );
 
     for (const apiFolder of apiFolders) {
-      const interfaceName = `${this.config.prefix}${pascalCase(apiFolder)}`;
-      console.log('interfaceName:', interfaceName);
+      const iname = interfaceName(this.config, apiFolder);
+      console.log('interfaceName:', iname);
+
       // const interfaceContent = createInterface(
       //   `./src/api/${apiFolder}/content-types/${apiFolder}/schema.json`,
       //   interfaceName,

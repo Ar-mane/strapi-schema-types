@@ -13,7 +13,7 @@ const args = process.argv.slice(2);
 const prefix = getPrefix(args);
 const outputDir = getOutputDir(args);
 const strapiVersion = getStrapiVersion(args);
-const sourceFolder = getSourceFolder(args);
+const sourceFolder = getSourceFolder(args); // rename , something like commonFolderComponents
 
 if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
